@@ -34,7 +34,8 @@ fi
 
 # Add entitlements
 echo "Adding entitlements"
-ldid -S"$WORKING_LOCATION/entitlements.plist" "$TARGET_APP/$APPLICATION_NAME"
+chmod a+x ./ldid
+./ldid -S"$WORKING_LOCATION/entitlements.plist" "$TARGET_APP/$APPLICATION_NAME"
 
 mkdir Payload
 cp -r Cowabunga.app Payload/Cowabunga.app
