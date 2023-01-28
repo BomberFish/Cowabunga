@@ -5,6 +5,7 @@ set -e
 cd "$(dirname "$0")"
 
 WORKING_LOCATION="$(pwd)"
+echo $WORKING_LOCATION
 APPLICATION_NAME=Cowabunga
 rm -rf build
 mkdir build
@@ -34,8 +35,8 @@ fi
 
 # Add entitlements
 echo "Adding entitlements"
-chmod a+x ./ldid
-./ldid -S"$WORKING_LOCATION/entitlements.plist" "$TARGET_APP/$APPLICATION_NAME"
+chmod a+x $WORKING_LOCATION/ldid
+$WORKING_LOCATION/ldid -S"$WORKING_LOCATION/entitlements.plist" "$TARGET_APP/$APPLICATION_NAME"
 
 mkdir Payload
 cp -r Cowabunga.app Payload/Cowabunga.app
