@@ -223,7 +223,7 @@ struct HomeView: View {
                 Section {
                     
                 } header: {
-                    Text("Version " + (Bundle.main.releaseVersionNumber ?? "UNKNOWN") + versionBuild)
+                    Text("Version " + (Bundle.main.releaseVersionNumber ?? "UNKNOWN") + versionBuild + ", iOS " + UIDevice.current.systemVersion)
                 }
             }
             .navigationTitle("Cowabunga")
