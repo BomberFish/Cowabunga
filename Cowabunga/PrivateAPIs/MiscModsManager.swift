@@ -265,6 +265,7 @@ func setRegion() -> Bool {
     }
 }
 
+// FIXME: Crashes!
 func setCarrierName(newName: String) -> Bool {
     do {
         var succeeded: Bool = true

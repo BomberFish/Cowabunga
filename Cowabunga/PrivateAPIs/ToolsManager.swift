@@ -51,6 +51,7 @@ enum OverwritingFileTypes {
     case plist
     case audio
     case region
+    case generic
 }
 
 // reset the device subtype
@@ -119,6 +120,7 @@ func overwriteFile<Value>(typeOfFile: OverwritingFileTypes, fileIdentifier: Stri
             return succeeded
         }
     
+        
     // audio option
     } else if typeOfFile == OverwritingFileTypes.audio {
         let path = AudioFiles.getAudioPath(attachment: fileIdentifier)
@@ -166,9 +168,15 @@ func overwriteFile<Value>(typeOfFile: OverwritingFileTypes, fileIdentifier: Stri
             succeeded = succeeded && overwriteFileWithDataImpl(originPath: startPath + dev + ".txt", replacementData: newData)
         }
         return succeeded
+        // TODO: Generic
+    } else if typeOfFile == OverwritingFileTypes.generic {
+        var succeeded = true
+        
+        return succeeded
     }
     return false
 }
+
 
 // Overwrite the system font with the given font using CVE-2022-46689.
 // The font must be specially prepared so that it skips past the last byte in every 16KB page.

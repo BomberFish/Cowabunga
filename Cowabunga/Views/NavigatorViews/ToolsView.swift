@@ -45,7 +45,8 @@ struct ToolsView: View {
         .init(key: "AudioView", view: AnyView(AudioView()), title: "Sound Effects", imageName: "speaker.wave.2.fill"),
         .init(key: "PasscodeEditorView", view: AnyView(PasscodeEditorView()), title: "Passcode Faces", imageName: "ellipsis.rectangle"),
         .init(key: "LSFootnoteChangerView", view: AnyView(LSFootnoteChangerView()), title: "Lock Screen Footnote", imageName: "iphone"),
-        .init(key: "OtherModsView", view: AnyView(OtherModsView()), title: "Miscellaneous", imageName: "hammer")
+        .init(key: "OtherModsView", view: AnyView(OtherModsView()), title: "Miscellaneous", imageName: "hammer"),
+        .init(key: "Lock", view: AnyView(LockView()), title: "Padlock - TrollLock (experimental)", imageName: "lock")
         //.init(key: "CarrierNameChangerView", view: AnyView(CarrierNameChangerView()), title: "Custom Carrier Name", imageName: "chart.bar"),
         //.init(key: "LockscreenRespringView", view: AnyView(LockscreenRespringView()), title: "Locking after Respring", imageName: "lock"),
         //.init(key: "CalculatorErrorView", view: AnyView(CalculatorErrorView()), title: "Calculator Error Message", imageName: "function"),
@@ -73,7 +74,7 @@ struct ToolsView: View {
                     Text("General")
                 }
                 
-                /*Section {
+                Section {
                     ForEach($springboardOptions) { option in
                         HStack {
                             Image(systemName: option.imageName.wrappedValue)
@@ -99,7 +100,7 @@ struct ToolsView: View {
                     Text("Experimental")
                 } footer: {
                     Text("Last 5 options are not guaranteed to work")
-                }*/
+                }
             }
             .navigationTitle("Tools")
             .onAppear {
