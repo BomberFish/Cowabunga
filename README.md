@@ -11,29 +11,29 @@ IPA available in the [Releases](https://github.com/leminlimez/DockHider/releases
 - Running in the background to keep some changes from reverting
     - From running tests, battery loss is negligible (~1% per day on frequent), but that may very
 
-**Springboard
+### Springboard
 - Hide dock
 - Hide home bar
 - Hide folder backgrounds
 - Disable folder background blur
 - Disable app switcher blur
 
-**Audio
+### Audio
 - Custom sound effects
 - Upload your own sounds (nearly every audio format allowed!)
 
-**Passcode
+### Passcode
 - Customize passcode keys
 - Import passcode keys files (.passthm) from TrollTools
 
-**Misc
+### Misc
 - Custom carrier name
 Warning: Use the features below at your own risk!
 - Change system version (shows in settings, iOS 15+)
 - Enable iPhone X Gestures
 - Enable Dynamic Island (iOS 16+)
 
-**Extra Tools
+### Extra Tools
 - Lock Screen Footnote
 - Supervise Device
 - Device Organization Name
