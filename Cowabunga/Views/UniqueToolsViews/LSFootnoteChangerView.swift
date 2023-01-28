@@ -35,8 +35,16 @@ struct LSFootnoteChangerView: View {
                             }
                         return .clear
                     })
+                    // Thanks Stackoverflow!
                     TextField("Footnote", text: $footnoteText)
-                        .foregroundColor(.white)
+                        .placeholder(when: footnoteText.isEmpty){
+                            Text("Footnote")
+                                .foregroundColor(Color(UIColor.white))
+                                .offset(x: 0, y: footnoteOffset)
+                                .frame(width: footnoteSize[0], height: footnoteSize[1], alignment: .center)
+                                .multilineTextAlignment(.center)
+                        }
+                        .foregroundColor(Color(UIColor.white))
                         .offset(x: 0, y: footnoteOffset)
                         .frame(width: footnoteSize[0], height: footnoteSize[1], alignment: .center)
                         .multilineTextAlignment(.center)
@@ -81,6 +89,19 @@ struct LSFootnoteChangerView: View {
             footnoteText = UserDefaults.standard.string(forKey: "LSFootnoteText") ?? ""
         }
         .navigationTitle("Lock Screen Footnote Changer")
+    }
+}
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
     }
 }
 
