@@ -38,7 +38,16 @@ let settingsOptions: [SettingsPageOption] = [
     // Numeric Wi-Fi Strength
     .init(type: SettingsOptionType.toggle, defaultValue: 0, key: "SBShowRSSI", label: "Numeric Wi-Fi Strength", editingFilePath: "com.apple.springboard"),
     // Numeric Cellular Strength
-    //.init(type: SettingsOptionType.toggle, defaultValue: 0, key: "SBShowGSMRSSI", label: "Numeric Cellular Strength", editingFilePath: "com.apple.springboard")
+    .init(type: SettingsOptionType.toggle, defaultValue: 0, key: "SBShowGSMRSSI", label: "Numeric Cellular Strength", editingFilePath: "com.apple.springboard"),
+    // Stagemanager
+    .init(type: SettingsOptionType.toggle, defaultValue: 0, key: "SBChamoisWindowingEnabled", label: "Stage Manager", editingFilePath: ".GlobalPreferences"),
+    .init(type: SettingsOptionType.toggle, defaultValue: 0, key: "SBChamoisWindowingEverEnabled", label: "Stage Manager Ever Enabled", editingFilePath: ".GlobalPreferences"),
+    // Internal stuff
+    .init(type: SettingsOptionType.toggle, defaultValue: 0, key: "IDSDiagnosticsEnabled", label: "IDSDiagnosticsEnabled", editingFilePath: ".GlobalPreferences"),
+    .init(type: SettingsOptionType.toggle, defaultValue: 0, key: "VCDiagnosticsEnabled", label: "VCDiagnosticsEnabled", editingFilePath: ".GlobalPreferences"),
+    .init(type: SettingsOptionType.toggle, defaultValue: 0, key: "UIStatusBarShowBuildVersion", label: "UIStatusBarShowBuildVersion", editingFilePath: ".GlobalPreferences"),
+    .init(type: SettingsOptionType.toggle, defaultValue: 0, key: "AccessoryDeveloperEnabled", label: "AccessoryDeveloperEnabled", editingFilePath: ".GlobalPreferences"),
+    
 ]
 
 
