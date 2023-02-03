@@ -1,0 +1,22 @@
+// TODO: Canada, my homeland
+
+/* Bundle display name */
+"CFBundleDisplayName" = "Cowabunga";
+
+/* Bundle name */
+"CFBundleName" = "Cowabunga";
+
+/* Privacy - Media Library Usage Description */
+"NSAppleMusicUsageDescription" = "";
+
+/* Privacy - Location Always and When In Use Usage Description */
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "";
+
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "";
+
+/* Privacy - Photo Library Usage Description */
+"NSPhotoLibraryUsageDescription" = "";
+
+
+

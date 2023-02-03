@@ -1,0 +1,19 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Cowabunga";
+
+/* Bundle name */
+"CFBundleName" = "Cowabunga";
+
+/* Privacy - Media Library Usage Description */
+"NSAppleMusicUsageDescription" = "";
+
+/* Privacy - Location Always and When In Use Usage Description */
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Cowabunga marche dans l'arrière pour vérifier que des modifications rester. Normalement, iOS ferme ce genre de application après un period de temps. Mais Cowabunga triche iOS par demander le données de géolocalisation, ainsi permettre sessions plus longue. Les données est jamais garder, seulment cherché.";
+
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "";
+
+/* Privacy - Photo Library Usage Description */
+"NSPhotoLibraryUsageDescription" = "";
+
+

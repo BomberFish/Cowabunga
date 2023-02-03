@@ -173,6 +173,10 @@
 		6FF21AFA298826FF0054EBC0 /* MainCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCardView.swift; sourceTree = "<group>"; };
 		6FF21AFC298827190054EBC0 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		6FF21AFF29882C020054EBC0 /* CoreServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreServices.h; sourceTree = "<group>"; };
+		D6EA856F298D79D5003CADA1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D6EA8570298D79D5003CADA1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D6EA8571298D79DB003CADA1 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		D6EA8572298D79DB003CADA1 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -577,6 +581,8 @@
 				en,
 				Base,
 				ru,
+				fr,
+				"fr-CA",
 			);
 			mainGroup = 6F721C83296482C6001CFE46;
 			packageReferences = (
@@ -690,6 +696,8 @@
 			children = (
 				21CD1052298C8151007EE649 /* en */,
 				21CD1057298C8177007EE649 /* ru */,
+				D6EA8570298D79D5003CADA1 /* fr */,
+				D6EA8572298D79DB003CADA1 /* fr-CA */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -699,6 +707,8 @@
 			children = (
 				21CD1055298C8177007EE649 /* ru */,
 				21CD1058298C8184007EE649 /* en */,
+				D6EA856F298D79D5003CADA1 /* fr */,
+				D6EA8571298D79DB003CADA1 /* fr-CA */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
