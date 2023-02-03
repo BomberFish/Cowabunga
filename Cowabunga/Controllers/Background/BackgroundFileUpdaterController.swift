@@ -46,6 +46,13 @@ class BackgroundFileUpdaterController: ObservableObject {
                 let _ = overwriteFile(typeOfFile: OverwritingFileTypes.springboard, fileIdentifier: "FolderBGHidden", true)
             } else {
                 SpringboardColorManager.applyColor(forType: SpringboardColorManager.SpringboardType.folder)
+                SpringboardColorManager.applyColor(forType: SpringboardColorManager.SpringboardType.libraryFolder)
+            }
+            
+            if UserDefaults.standard.bool(forKey: "FolderBlurDisabled") == true {
+                let _ = overwriteFile(typeOfFile: OverwritingFileTypes.springboard, fileIdentifier: "FolderBlurDisabled", true)
+            } else {
+                SpringboardColorManager.applyColor(forType: SpringboardColorManager.SpringboardType.folderBG)
             }
             
             // apply the transparent modules
