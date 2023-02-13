@@ -61,7 +61,7 @@ struct ThemesView: View {
                                                 Label("Rename", systemImage: "pencil")
                                             }
                                             
-                                            Button {
+                                            Button(role: .destructive) {
                                                 themes.removeAll { theme1 in theme1.id == theme.id }
                                                 themeManager.themes = themes
                                                 do {
@@ -71,6 +71,7 @@ struct ThemesView: View {
                                                 }
                                             } label: {
                                                 Label("Remove theme", systemImage: "trash")
+                                                    
                                             }
                                         }
                                 }
