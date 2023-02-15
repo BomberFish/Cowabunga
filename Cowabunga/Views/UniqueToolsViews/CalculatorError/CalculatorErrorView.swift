@@ -82,19 +82,19 @@ struct CalculatorErrorView: View {
                         Button("7", action: {something(number: "7")})
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button("8", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button("9", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button("×", action: nothing)
@@ -108,19 +108,19 @@ struct CalculatorErrorView: View {
                         Button("4", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button("5", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button("6", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button("+", action: nothing)
@@ -134,19 +134,19 @@ struct CalculatorErrorView: View {
                         Button("1", action: {something(number: "1")})
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button("2", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button("3", action: {something(number: "3")})
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button("-", action: nothing)
@@ -160,13 +160,13 @@ struct CalculatorErrorView: View {
                         Button("0", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button(".", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
-                                            backgroundColor: .secondary,
+                                            backgroundColor: Color(UIColor.darkGray),
                                             foregroundColor: .white)
                                         )
                         Button("=", action: nothing)
@@ -180,7 +180,6 @@ struct CalculatorErrorView: View {
             }
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
-        .preferredColorScheme(.light)
         
         .toolbar {
             Button(action:{
