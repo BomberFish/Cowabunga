@@ -287,7 +287,6 @@ struct OtherModsView: View {
                                     try? FileManager.default.removeItem(at: aliasURL)
                                     try FileManager.default.createSymbolicLink(at: aliasURL, withDestinationURL: tmpPlistURL)
                                     
-                                    Haptic.shared.notify(.success)
                                     UIApplication.shared.confirmAlert(title: NSLocalizedString("Success!", comment: ""), body: NSLocalizedString("Please respring to finalize changes. Reboot to revert.", comment: "Successfully applying custom resolution"), onOK: {
                                         xpc_crash("com.apple.cfprefsd.daemon")
                                         xpc_crash("com.apple.backboard.TouchDeliveryPolicyServer")
@@ -470,7 +469,6 @@ struct OtherModsView: View {
                                     let succeeded: Bool = resetDeviceSubType()
                                     if succeeded {
                                         // successfully reset
-                                        Haptic.shared.notify(.success)
                                         UIApplication.shared.alert(title: "Successfully reset the Default SubType!", body: "The Default SubType should now be accurate to your device.")
                                         // set the new
                                         for (i, v) in deviceSubTypes.enumerated() {
@@ -480,7 +478,6 @@ struct OtherModsView: View {
                                         }
                                     } else {
                                         // failed to apply
-                                        Haptic.shared.notify(.error)
                                         let newUIAlert = UIAlertController(title: "Failed to determine Default SubType!", message: "Please submit an issue on github and include your device model: \(UIDevice().machineName).", preferredStyle: .alert)
                                         newUIAlert.addAction(.init(title: "Cancel", style: .cancel))
                                         newUIAlert.addAction(.init(title: "Submit Issue", style: .default, handler: { _ in

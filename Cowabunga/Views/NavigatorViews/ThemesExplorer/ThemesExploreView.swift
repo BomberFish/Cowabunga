@@ -164,10 +164,8 @@ struct ThemesExploreView: View {
                 try await cowabungaAPI.downloadTheme(theme: theme)
                 Haptic.shared.notify(.success)
                 UIApplication.shared.dismissAlert(animated: true)
-                Haptic.shared.notify(.success)
                 UIApplication.shared.alert(title: NSLocalizedString("Success!", comment: ""), body: "The theme was successfully downloaded and saved!")
             } catch {
-                Haptic.shared.notify(.error)
                 print("Could not download passcode theme: \(error.localizedDescription)")
                 Haptic.shared.notify(.error)
                 UIApplication.shared.dismissAlert(animated: true)

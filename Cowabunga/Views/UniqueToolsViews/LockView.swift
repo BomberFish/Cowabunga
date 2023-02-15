@@ -110,10 +110,8 @@ struct LockView: View {
                             print("applying lock")
                             let succeeded = LockManager.applyLock(lockName: lock.title.wrappedValue)
                             if succeeded {
-                                Haptic.shared.notify(.success)
                                 UIApplication.shared.alert(title: "Successfully applied lock!", body: "Respring needed to finish applying.")
                             } else {
-                                Haptic.shared.notify(.error)
                                 UIApplication.shared.alert(body: "An error occurred while trying to apply the lock.")
                             }
                         }) {
@@ -230,10 +228,8 @@ struct LockView: View {
                                 let icon = try LockManager.addImportedLock(lockName: fileImportName, url: url)
                                 let uiIcon = UIImage(data: icon)
                                 locks.append(Lock.init(title: fileImportName, icon: uiIcon))
-                                Haptic.shared.notify(.success)
                                 UIApplication.shared.alert(title: NSLocalizedString("Success!", comment: ""), body: NSLocalizedString("The imported lock was successfully saved.", comment: "Saving imported lock"))
                             } catch {
-                                Haptic.shared.notify(.error)
                                 print(error.localizedDescription)
                                 UIApplication.shared.alert(title: NSLocalizedString("Unable to save imported lock!", comment: "Failed to import lock"), body: error.localizedDescription)
                             }

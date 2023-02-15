@@ -30,7 +30,6 @@ struct CowabungaApp: App {
 #if targetEnvironment(simulator)
 #else
                     if #available(iOS 16.2, *) {
-                        Haptic.shared.notify(.error)
                         UIApplication.shared.alert(title: "Not Supported", body: "This version of iOS is not supported.")
                     } else {
                         do {
@@ -43,15 +42,12 @@ struct CowabungaApp: App {
                             if #available(iOS 15, *) {
                                 grant_full_disk_access() { error in
                                     if (error != nil) {
-                                        Haptic.shared.notify(.error)
                                         UIApplication.shared.alert(title: "Access Error", body: "Error: \(String(describing: error?.localizedDescription))\nPlease close the app and retry.")
                                     } else {
-                                        
                                         StatusManager.sharedInstance().setIsMDCMode(true)
                                     }
                                 }
                             } else {
-                                Haptic.shared.notify(.error)
                                 UIApplication.shared.alert(title: "MDC Not Supported", body: "Please install via TrollStore")
                             }
                         }
@@ -64,7 +60,6 @@ struct CowabungaApp: App {
                             
                             if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
                                 if (json["tag_name"] as? String)?.replacingOccurrences(of: "v", with: "").compare(version, options: .numeric) == .orderedDescending {
-                                    Haptic.shared.notify(.warning)
                                     UIApplication.shared.confirmAlert(title: "Update available", body: "A new Cowabunga update is available, do you want to visit releases page?", onOK: {
                                         UIApplication.shared.open(URL(string: "https://github.com/leminlimez/Cowabunga/releases/latest")!)
                                     }, noCancel: false)
@@ -88,13 +83,8 @@ struct CowabungaApp: App {
                             try PasscodeKeyFaceManager.setFacesFromTheme(url, TelephonyDirType.passcode, colorScheme: colorScheme, keySize: CGFloat(defaultKeySize), customX: CGFloat(150), customY: CGFloat(150))
                             // show the passcode screen
                             //PasscodeEditorView()
-                            Haptic.shared.notify(.success)
                             UIApplication.shared.alert(title: "Success!", body: "Successfully imported and applied passcode theme!")
-                        } catch {
-                            Haptic.shared.notify(.error)
-                            UIApplication.shared.alert(body: error.localizedDescription)
-                            
-                        }
+                        } catch { UIApplication.shared.alert(body: error.localizedDescription) }
                     }
                     
                     // for opening zips of app themes
@@ -113,10 +103,8 @@ struct CowabungaApp: App {
                             ThemeManager.shared.themes.append(theme)
                             
                             try FileManager.default.removeItem(at: tmpExtract)
-                            Haptic.shared.notify(.success)
                             UIApplication.shared.alert(title: NSLocalizedString("Success", comment: ""), body: NSLocalizedString("App theme was successfully saved!", comment: ""))
                         } catch {
-                            Haptic.shared.notify(.error)
                             UIApplication.shared.alert(title: NSLocalizedString("Failed to save theme!", comment: ""), body: error.localizedDescription)
                         }
                     }

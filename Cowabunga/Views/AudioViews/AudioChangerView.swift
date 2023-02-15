@@ -249,7 +249,6 @@ struct AudioChangerView: View {
                             customaudio(fileURL: url) { audioData in
                                 if audioData != nil {
                                     // success
-                                    Haptic.shared.notify(.success)
                                     UIApplication.shared.alert(title: NSLocalizedString("Success!", comment: ""), body: NSLocalizedString("The imported audio was successfully encoded and saved.", comment: "Saving imported audio"))
                                     // add to the list
                                     customAudio.append(CustomAudioName.init(audioName: "USR_" + fileName, displayName: fileName, checked: false))

@@ -249,25 +249,20 @@ func setRegion() -> Bool {
             if newData.count == originalSize {
                 let succeeded = MDC.overwriteFile(at: plistPath, with: newData)
                 if succeeded {
-                    Haptic.shared.notify(.success)
                     UIApplication.shared.alert(title: "Successfully applied region", body: "Respring and see if it worked")
                 } else {
-                    Haptic.shared.notify(.error)
                     UIApplication.shared.alert(body: "Could not overwrite region file")
                 }
                 return succeeded
             } else {
-                Haptic.shared.notify(.error)
                 UIApplication.shared.alert(body: "The file sizes did not match!")
                 return false
             }
         } else {
-            Haptic.shared.notify(.error)
             UIApplication.shared.alert(body: "A value failed to apply")
             return false
         }
     } catch {
-        Haptic.shared.notify(.error)
         print("An error occurred while setting region")
         UIApplication.shared.alert(body: "An error occurred while setting region")
         return false

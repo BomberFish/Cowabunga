@@ -279,10 +279,8 @@ struct SpringboardColorChangerView: View {
                                         try SpringboardColorManager.deteleColor(forType: .folder)
                                         try SpringboardColorManager.deteleColor(forType: .folderBG)
                                         try SpringboardColorManager.deteleColor(forType: .libraryFolder)
-                                        Haptic.shared.notify(.success)
                                         UIApplication.shared.alert(title: "Success!", body: "Successfully deleted color files.")
                                     } catch {
-                                        Haptic.shared.notify(.error)
                                         UIApplication.shared.alert(title: "Error deleting color files!", body: error.localizedDescription)
                                     }
                                 }) {
@@ -353,10 +351,8 @@ struct SpringboardColorChangerView: View {
                                 Button(action: {
                                     do {
                                         try SpringboardColorManager.deteleColor(forType: .dock)
-                                        Haptic.shared.notify(.success)
                                         UIApplication.shared.alert(title: "Success!", body: "Successfully deleted color files.")
                                     } catch {
-                                        Haptic.shared.notify(.error)
                                         UIApplication.shared.alert(title: "Error deleting color files!", body: error.localizedDescription)
                                     }
                                 }) {
@@ -425,10 +421,8 @@ struct SpringboardColorChangerView: View {
                                 Button(action: {
                                     do {
                                         try SpringboardColorManager.deteleColor(forType: .switcher)
-                                        Haptic.shared.notify(.success)
                                         UIApplication.shared.alert(title: "Success!", body: "Successfully deleted color files.")
                                     } catch {
-                                        Haptic.shared.notify(.error)
                                         UIApplication.shared.alert(title: "Error deleting color files!", body: error.localizedDescription)
                                     }
                                 }) {

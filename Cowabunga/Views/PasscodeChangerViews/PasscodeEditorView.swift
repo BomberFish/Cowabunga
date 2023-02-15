@@ -131,11 +131,9 @@ struct PasscodeEditorView: View {
                                 if directoryType == .passcode {
                                     respring()
                                 } else {
-                                    Haptic.shared.notify(.success)
                                     UIApplication.shared.alert(title: NSLocalizedString("Dialer keys successfully cleared!", comment: ""), body: NSLocalizedString("Please close and reopen the Phone app.", comment: ""))
                                 }
                             } catch {
-                                Haptic.shared.notify(.error)
                                 UIApplication.shared.alert(body: NSLocalizedString("An error occured.", comment: "") + " \(error)")
                             }
                         }
