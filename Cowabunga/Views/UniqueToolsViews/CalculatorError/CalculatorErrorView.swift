@@ -33,6 +33,7 @@ struct CalculatorErrorView: View {
                 return try ApplicationManager.getApps().first(where: { $0.bundleIdentifier == "com.apple.calculator" })?.bundleURL
             } catch {
                 // :trollface:
+                UIApplication.shared.alert(body: "Unable to find calculator app. Maybe you're on an iPad? :trollface:")
                 return URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
             }
             
@@ -234,7 +235,7 @@ struct CalculatorErrorView: View {
         print("nope")
         leet = ""
     }
-
+    // funny.
     func something(number: String) {
         Haptic.shared.play(.medium)
         print("yep")
