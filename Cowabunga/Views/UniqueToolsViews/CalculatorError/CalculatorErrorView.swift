@@ -193,7 +193,7 @@ struct CalculatorErrorView: View {
     
     // FIXME: what on god's green earth
     func nothing() {
-       Haptic.shared.play(.light)
+       Haptic.shared.play(.medium)
        print("nope")
         leet = ""
     }
@@ -201,6 +201,7 @@ struct CalculatorErrorView: View {
         Haptic.shared.play(.medium)
         print("yep")
         leet = leet + number
+        print(leet)
         if leet == "1337" {
             Haptic.shared.notify(.success)
             UIApplication.shared.alert(title: "Access Granted" ,body: "Welcome, Neo")
