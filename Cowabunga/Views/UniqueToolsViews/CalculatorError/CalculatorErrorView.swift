@@ -25,6 +25,12 @@ struct CalculatorErrorView: View {
                     .clipShape(Capsule())
         }
     }
+    
+    // Thanks TrollTools! :trolleytools:
+    var calculatorBundleURL: URL? = {
+        let apps = LSApplicationWorkspace.default().allApplications()!
+        return apps.first { $0.applicationIdentifier == "com.apple.calculator" }?.bundleURL
+    }()
 
     var body: some View {
         ZStack {
