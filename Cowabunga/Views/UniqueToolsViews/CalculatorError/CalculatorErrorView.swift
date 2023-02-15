@@ -31,9 +31,8 @@ struct CalculatorErrorView: View {
         let apps = {
             do{
                 return try ApplicationManager.getApps().first(where: { $0.bundleIdentifier == "com.apple.calculator" })?.bundleURL
-                
             } catch{
-                // 
+                // :trollface:
                 return URL.init(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
             }
             
