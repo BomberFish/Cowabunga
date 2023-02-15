@@ -177,12 +177,18 @@ struct CalculatorErrorView: View {
         
         .toolbar {
             Button(action:{
-                nothing()
+                setName(value: errorMessage)
             },label:{
                 Image(systemName: "checkmark")
             })
         }
     }
+    
+    func setName(value: String) {
+        Haptic.shared.play(.heavy)
+        UIApplication.shared.alert(title: "Not Implemented" ,body: "Message: " + value)
+    }
+    
     // FIXME: what on god's green earth
     func nothing() {
        Haptic.shared.play(.light)
