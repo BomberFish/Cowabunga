@@ -9,6 +9,23 @@ import SwiftUI
 
 struct CalculatorErrorView: View {
     @State var errorMessage = "Error"
+    @State var leet = ""
+    struct CalculatorButtonStyle: ButtonStyle {
+        
+        var size: CGFloat
+        var backgroundColor: Color
+        var foregroundColor: Color
+        
+        func makeBody(configuration: Configuration) -> some View {
+                configuration.label
+                    .font(.system(size: 32, weight: .medium))
+                    .frame(width: size, height: size)
+                    .background(backgroundColor)
+                    .foregroundColor(foregroundColor)
+                    .clipShape(Capsule())
+        }
+    }
+
     var body: some View {
         ZStack {
             Color.black
@@ -29,26 +46,26 @@ struct CalculatorErrorView: View {
                 // FIXME: Probably a better way to do this :cowatrolley:
                 VStack {
                     HStack {
-                        Button("AC", action: CalculatorFunctions.nothing)
+                        Button("AC", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: Color(UIColor.lightGray),
                                             foregroundColor: .black)
                                         )
 
-                        Button("±", action: CalculatorFunctions.nothing)
+                        Button("±", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: Color(UIColor.lightGray),
                                             foregroundColor: .black)
                                         )
-                        Button("%", action: CalculatorFunctions.nothing)
+                        Button("%", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: Color(UIColor.lightGray),
                                             foregroundColor: .black)
                                         )
-                        Button("÷", action: CalculatorFunctions.nothing)
+                        Button("÷", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .orange,
@@ -56,25 +73,25 @@ struct CalculatorErrorView: View {
                                         )
                     }
                     HStack {
-                        Button("7", action: CalculatorFunctions.nothing)
+                        Button("7", action: {something(number: "7")})
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button("8", action: CalculatorFunctions.nothing)
+                        Button("8", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button("9", action: CalculatorFunctions.nothing)
+                        Button("9", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button("×", action: CalculatorFunctions.nothing)
+                        Button("×", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .orange,
@@ -82,25 +99,25 @@ struct CalculatorErrorView: View {
                                         )
                     }
                     HStack {
-                        Button("4", action: CalculatorFunctions.nothing)
+                        Button("4", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button("5", action: CalculatorFunctions.nothing)
+                        Button("5", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button("6", action: CalculatorFunctions.nothing)
+                        Button("6", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button("+", action: CalculatorFunctions.nothing)
+                        Button("+", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .orange,
@@ -108,25 +125,25 @@ struct CalculatorErrorView: View {
                                         )
                     }
                     HStack {
-                        Button("1", action: CalculatorFunctions.nothing)
+                        Button("1", action: {something(number: "1")})
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button("2", action: CalculatorFunctions.nothing)
+                        Button("2", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button("3", action: CalculatorFunctions.nothing)
+                        Button("3", action: {something(number: "3")})
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button("-", action: CalculatorFunctions.nothing)
+                        Button("-", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .orange,
@@ -134,19 +151,19 @@ struct CalculatorErrorView: View {
                                         )
                     }
                     HStack {
-                        Button("0", action: CalculatorFunctions.nothing)
+                        Button("0", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button(".", action: CalculatorFunctions.nothing)
+                        Button(".", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .secondary,
                                             foregroundColor: .white)
                                         )
-                        Button("=", action: CalculatorFunctions.nothing)
+                        Button("=", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                             size: 80,
                                             backgroundColor: .orange,
@@ -157,6 +174,29 @@ struct CalculatorErrorView: View {
             }
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
+        
+        .toolbar {
+            Button(action:{
+                nothing()
+            },label:{
+                Image(systemName: "checkmark")
+            })
+        }
+    }
+    // FIXME: what on god's green earth
+    func nothing() {
+       Haptic.shared.play(.light)
+       print("nope")
+    }
+    func something(number: String) {
+        Haptic.shared.play(.medium)
+        print("yep")
+        leet = leet + number
+        if leet == "1337" {
+            Haptic.shared.notify(.success)
+            UIApplication.shared.alert(title: "Access Granted" ,body: "Welcome, Neo")
+            leet = ""
+        }
     }
 }
 
