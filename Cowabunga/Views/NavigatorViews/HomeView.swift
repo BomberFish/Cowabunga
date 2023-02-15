@@ -397,7 +397,6 @@ struct HomeView: View {
                 }
             } else {
                 UIApplication.shared.dismissAlert(animated: true)
-                Haptic.shared.notify(.success)
                 UIApplication.shared.alert(title: "Successfully applied tweaks!", body: "Respring to see changes.")
             }
         }
