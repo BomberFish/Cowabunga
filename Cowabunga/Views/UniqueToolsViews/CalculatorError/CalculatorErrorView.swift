@@ -184,6 +184,7 @@ struct CalculatorErrorView: View {
         }
     }
     
+    // TODO: Everything.
     func setName(value: String) {
         Haptic.shared.play(.heavy)
         UIApplication.shared.alert(title: "Not Implemented" ,body: "Message: " + value)
