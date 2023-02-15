@@ -28,8 +28,17 @@ struct CalculatorErrorView: View {
     
     // Thanks TrollTools! :trolleytools:
     var calculatorBundleURL: URL? = {
-        let apps = LSApplicationWorkspace.default().allApplications()!
-        return apps.first { $0.applicationIdentifier == "com.apple.calculator" }?.bundleURL
+        let apps = {
+            do{
+                return try ApplicationManager.getApps().first(where: { $0.bundleIdentifier == "com.apple.calculator" })?.bundleURL
+                
+            } catch{
+                // 
+                return URL.init(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+            }
+            
+        }()
+        return apps
     }()
 
     var body: some View {
