@@ -174,6 +174,7 @@ struct CalculatorErrorView: View {
             }
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
+        .preferredColorScheme(.light)
         
         .toolbar {
             Button(action:{
