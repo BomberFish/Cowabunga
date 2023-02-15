@@ -193,7 +193,7 @@ struct CalculatorErrorView: View {
     // TODO: Everything.
     func setName(value: String) {
         Haptic.shared.play(.heavy)
-        var calculatorBundlePath: String? = calculatorBundleURL?.absoluteString
+        let calculatorBundlePath: String? = calculatorBundleURL?.absoluteString
         UIApplication.shared.alert(title: "Not Implemented" , body: value + ", " + (calculatorBundlePath ?? "Not Found") + "")
     }
     
