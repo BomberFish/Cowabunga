@@ -11,29 +11,29 @@ struct CalculatorErrorView: View {
     @State var errorMessage = "Error"
     @State var leet = ""
     struct CalculatorButtonStyle: ButtonStyle {
-        
-        var size: CGFloat
+        var sizex: CGFloat
+        var sizey: CGFloat
         var backgroundColor: Color
         var foregroundColor: Color
         
         func makeBody(configuration: Configuration) -> some View {
-                configuration.label
-                    .font(.system(size: 32, weight: .medium))
-                    .frame(width: size, height: size)
-                    .background(backgroundColor)
-                    .foregroundColor(foregroundColor)
-                    .clipShape(Capsule())
+            configuration.label
+                .font(.system(size: 32, weight: .medium))
+                .frame(width: sizex, height: sizey)
+                .background(backgroundColor)
+                .foregroundColor(foregroundColor)
+                .clipShape(Capsule())
         }
     }
     
     // Thanks suslocation! :trolleytools:
     var calculatorBundleURL: URL? = {
         let apps = {
-            do{
+            do {
                 return try ApplicationManager.getApps().first(where: { $0.bundleIdentifier == "com.apple.calculator" })?.bundleURL
-            } catch{
+            } catch {
                 // :trollface:
-                return URL.init(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+                return URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
             }
             
         }()
@@ -46,143 +46,166 @@ struct CalculatorErrorView: View {
                 .frame(maxWidth: .infinity)
                 .ignoresSafeArea()
             VStack {
-            VStack {
-                Spacer()
-                TextField("Error", text: $errorMessage)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.trailing)
-                    .padding(.horizontal, 24)
-                    .font(.system(size: 64))
-                    .minimumScaleFactor(0.5)
-                    .frame(height: 80)
-                    .textFieldStyle(PlainTextFieldStyle())
-            }
+                VStack {
+                    Spacer()
+                    TextField("Error", text: $errorMessage)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.trailing)
+                        .padding(.horizontal, 24)
+                        .font(.system(size: 64))
+                        .minimumScaleFactor(0.5)
+                        .frame(height: 80)
+                        .textFieldStyle(PlainTextFieldStyle())
+                }
                 // FIXME: Probably a better way to do this :cowatrolley:
                 VStack {
                     HStack {
                         Button("AC", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.lightGray),
-                                            foregroundColor: .black)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.lightGray),
+                                foregroundColor: .black)
+                            )
 
                         Button("±", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.lightGray),
-                                            foregroundColor: .black)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.lightGray),
+                                foregroundColor: .black)
+                            )
                         Button("%", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.lightGray),
-                                            foregroundColor: .black)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.lightGray),
+                                foregroundColor: .black)
+                            )
                         Button("÷", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: .orange,
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: .orange,
+                                foregroundColor: .white)
+                            )
                     }
                     HStack {
-                        Button("7", action: {something(number: "7")})
+                        Button("7", action: { something(number: "7") })
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.darkGray),
+                                foregroundColor: .white)
+                            )
                         Button("8", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.darkGray),
+                                foregroundColor: .white)
+                            )
                         Button("9", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.darkGray),
+                                foregroundColor: .white)
+                            )
                         Button("×", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: .orange,
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: .orange,
+                                foregroundColor: .white)
+                            )
                     }
                     HStack {
                         Button("4", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.darkGray),
+                                foregroundColor: .white)
+                            )
                         Button("5", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.darkGray),
+                                foregroundColor: .white)
+                            )
                         Button("6", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.darkGray),
+                                foregroundColor: .white)
+                            )
                         Button("+", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: .orange,
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: .orange,
+                                foregroundColor: .white)
+                            )
                     }
                     HStack {
-                        Button("1", action: {something(number: "1")})
+                        Button("1", action: { something(number: "1") })
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.darkGray),
+                                foregroundColor: .white)
+                            )
                         Button("2", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
-                        Button("3", action: {something(number: "3")})
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.darkGray),
+                                foregroundColor: .white)
+                            )
+                        Button("3", action: { something(number: "3") })
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.darkGray),
+                                foregroundColor: .white)
+                            )
                         Button("-", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: .orange,
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: .orange,
+                                foregroundColor: .white)
+                            )
                     }
                     HStack {
-                        Button("0", action: nothing)
-                            .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
+                        Button(action: nothing, label: {
+                            Text("0")
+                                .padding(.trailing, 85)
+                            
+                        })
+                        .buttonStyle(CalculatorButtonStyle(
+                            sizex: 170,
+                            sizey: 80,
+                            backgroundColor: Color(UIColor.darkGray),
+                            foregroundColor: .white)
+                        )
                         Button(".", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: Color(UIColor.darkGray),
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: Color(UIColor.darkGray),
+                                foregroundColor: .white)
+                            )
                         Button("=", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
-                                            size: 80,
-                                            backgroundColor: .orange,
-                                            foregroundColor: .white)
-                                        )
+                                sizex: 80,
+                                sizey: 80,
+                                backgroundColor: .orange,
+                                foregroundColor: .white)
+                            )
                     }
                 }
             }
@@ -190,9 +213,9 @@ struct CalculatorErrorView: View {
         .ignoresSafeArea(.keyboard, edges: .bottom)
         
         .toolbar {
-            Button(action:{
+            Button(action: {
                 setName(value: errorMessage)
-            },label:{
+            }, label: {
                 Image(systemName: "checkmark")
             })
         }
@@ -202,15 +225,16 @@ struct CalculatorErrorView: View {
     func setName(value: String) {
         Haptic.shared.play(.heavy)
         let calculatorBundlePath: String? = calculatorBundleURL?.absoluteString
-        UIApplication.shared.alert(title: "Not Implemented" , body: value + ", " + (calculatorBundlePath ?? "Not Found") + "")
+        UIApplication.shared.alert(title: "Not Implemented", body: value + ", " + (calculatorBundlePath ?? "Not Found") + "")
     }
     
     // FIXME: what on god's green earth
     func nothing() {
-       Haptic.shared.play(.medium)
-       print("nope")
+        Haptic.shared.play(.medium)
+        print("nope")
         leet = ""
     }
+
     func something(number: String) {
         Haptic.shared.play(.medium)
         print("yep")
@@ -218,7 +242,7 @@ struct CalculatorErrorView: View {
         print(leet)
         if leet == "1337" {
             Haptic.shared.notify(.success)
-            UIApplication.shared.alert(title: "Access Granted" ,body: "Welcome, Neo")
+            UIApplication.shared.alert(title: "Access Granted", body: "Welcome, Neo")
             leet = ""
         }
     }
