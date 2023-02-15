@@ -97,6 +97,8 @@
 		D60A489729995D830013F066 /* WhitelistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A489629995D830013F066 /* WhitelistView.swift */; };
 		D60A489929995DAD0013F066 /* FileContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A489829995DAD0013F066 /* FileContentsView.swift */; };
 		D60A489C29995DDC0013F066 /* WhitelistFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A489B29995DDC0013F066 /* WhitelistFunctions.swift */; };
+		D6E29081299C562C003953CC /* CalculatorErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E29080299C562C003953CC /* CalculatorErrorView.swift */; };
+		D6E29085299C609C003953CC /* CalculatorFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E29084299C609C003953CC /* CalculatorFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -252,6 +254,8 @@
 		D60A489629995D830013F066 /* WhitelistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhitelistView.swift; sourceTree = "<group>"; };
 		D60A489829995DAD0013F066 /* FileContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileContentsView.swift; sourceTree = "<group>"; };
 		D60A489B29995DDC0013F066 /* WhitelistFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhitelistFunctions.swift; sourceTree = "<group>"; };
+		D6E29080299C562C003953CC /* CalculatorErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorErrorView.swift; sourceTree = "<group>"; };
+		D6E29084299C609C003953CC /* CalculatorFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -599,6 +603,7 @@
 				6FF21AE5298479BD0054EBC0 /* LSFootnoteChangerView.swift */,
 				6FF21AF2298821010054EBC0 /* SpringboardColorChangerView.swift */,
 				6F429675298DE8D700A96108 /* StatusBarView.swift */,
+				D6E29082299C606E003953CC /* CalculatorError */,
 			);
 			path = UniqueToolsViews;
 			sourceTree = "<group>";
@@ -641,6 +646,15 @@
 				D60A489B29995DDC0013F066 /* WhitelistFunctions.swift */,
 			);
 			path = WhitelistViews;
+			sourceTree = "<group>";
+		};
+		D6E29082299C606E003953CC /* CalculatorError */ = {
+			isa = PBXGroup;
+			children = (
+				D6E29080299C562C003953CC /* CalculatorErrorView.swift */,
+				D6E29084299C609C003953CC /* CalculatorFunctions.swift */,
+			);
+			path = CalculatorError;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -792,6 +806,8 @@
 				6F75AD72298AB723009C0AD6 /* SpringboardColorManager.swift in Sources */,
 				6F4296B32992CC4F00A96108 /* AdvancedView.swift in Sources */,
 				21E155692989C2EC00B59658 /* StatusBarVisibilityController.swift in Sources */,
+				D6E29085299C609C003953CC /* CalculatorFunctions.swift in Sources */,
+				D6E29081299C562C003953CC /* CalculatorErrorView.swift in Sources */,
 				6FF21AF3298821010054EBC0 /* SpringboardColorChangerView.swift in Sources */,
 				6FF21AE129846AB20054EBC0 /* MaterialView.swift in Sources */,
 				21AC8BAD298C07CB000B7E85 /* URLCache+imageCache.swift in Sources */,
