@@ -30,7 +30,7 @@
 		21E155692989C2EC00B59658 /* StatusBarVisibilityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E155682989C2EC00B59658 /* StatusBarVisibilityController.swift */; };
 		21E54B182994063200D5F85A /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD105C298C8540007EE649 /* ThemeManager.swift */; };
 		21E54B222994070200D5F85A /* MacDirtyCowSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E54B212994070200D5F85A /* MacDirtyCowSwift.swift */; };
-		21E54B272994079700D5F85A /* libMacDirtyCowSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E54B1F2994070200D5F85A /* libMacDirtyCowSwift.a */; };
+		21E54B272994079700D5F85A /* libMacDirtyCowSwift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E54B1F2994070200D5F85A /* libMacDirtyCowSwift.a */; platformFilter = ios; };
 		21E54B2B29940A6700D5F85A /* Wrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E54B2A29940A6700D5F85A /* Wrappers.swift */; };
 		21E54B3D299412C300D5F85A /* UIImage+resizeToApprox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D76C42298D43AB00B3C707 /* UIImage+resizeToApprox.swift */; };
 		21E54B3E2994133F00D5F85A /* CatalogThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD105D298C8540007EE649 /* CatalogThemeManager.swift */; };
@@ -991,6 +991,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1047,6 +1048,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1085,12 +1087,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 8.0.4;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.leemin.Cowabunga;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1130,12 +1133,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 8.0.4;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.leemin.Cowabunga;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
