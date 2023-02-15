@@ -194,6 +194,7 @@ struct CalculatorErrorView: View {
     func nothing() {
        Haptic.shared.play(.light)
        print("nope")
+        leet = ""
     }
     func something(number: String) {
         Haptic.shared.play(.medium)
