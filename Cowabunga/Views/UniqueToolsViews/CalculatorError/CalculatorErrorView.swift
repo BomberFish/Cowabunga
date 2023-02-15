@@ -30,32 +30,128 @@ struct CalculatorErrorView: View {
                 VStack {
                     HStack {
                         Button("AC", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: Color(UIColor.lightGray),
+                                            foregroundColor: .black)
+                                        )
+
                         Button("±", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: Color(UIColor.lightGray),
+                                            foregroundColor: .black)
+                                        )
                         Button("%", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: Color(UIColor.lightGray),
+                                            foregroundColor: .black)
+                                        )
                         Button("÷", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .orange,
+                                            foregroundColor: .white)
+                                        )
                     }
                     HStack {
                         Button("7", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
                         Button("8", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
                         Button("9", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
                         Button("×", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .orange,
+                                            foregroundColor: .white)
+                                        )
                     }
                     HStack {
                         Button("4", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
                         Button("5", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
                         Button("6", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
                         Button("+", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .orange,
+                                            foregroundColor: .white)
+                                        )
+                    }
+                    HStack {
+                        Button("1", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
+                        Button("2", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
+                        Button("3", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
+                        Button("-", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .orange,
+                                            foregroundColor: .white)
+                                        )
                     }
                     HStack {
                         Button("0", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
                         Button(".", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .secondary,
+                                            foregroundColor: .white)
+                                        )
                         Button("=", action: CalculatorFunctions.nothing)
-                    }
-                    HStack {
-                        Button("5", action: CalculatorFunctions.nothing)
-                        Button("5", action: CalculatorFunctions.nothing)
-                        Button("5", action: CalculatorFunctions.nothing)
-                        Button("5", action: CalculatorFunctions.nothing)
+                            .buttonStyle(CalculatorButtonStyle(
+                                            size: 80,
+                                            backgroundColor: .orange,
+                                            foregroundColor: .white)
+                                        )
                     }
                 }
             }
