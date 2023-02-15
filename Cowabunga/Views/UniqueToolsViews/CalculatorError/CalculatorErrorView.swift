@@ -26,7 +26,7 @@ struct CalculatorErrorView: View {
         }
     }
     
-    // Thanks TrollTools! :trolleytools:
+    // Thanks suslocation! :trolleytools:
     var calculatorBundleURL: URL? = {
         let apps = {
             do{
