@@ -512,8 +512,10 @@ struct EditingOperationView: View {
                                     try AdvancedManager.deleteOperation(operationName: previousName)
                                     try AdvancedManager.saveOperation(operation: operation, category: category, replacingFileData: replacingData)
                                     UIApplication.shared.dismissAlert(animated: true)
+                                    Haptic.shared.notify(.success)
                                     UIApplication.shared.alert(title: NSLocalizedString("Success!", comment: ""), body: NSLocalizedString("The operation was successfully saved!", comment: "when an operation is saved"))
                                 } catch {
+                                    Haptic.shared.notify(.error)
                                     UIApplication.shared.dismissAlert(animated: true)
                                     UIApplication.shared.alert(body: NSLocalizedString("An error occurred while saving the operation", comment: "when an operation fails to save") + ": \(error.localizedDescription)")
                                 }
@@ -536,9 +538,11 @@ struct EditingOperationView: View {
                                 do {
                                     try operation.parseData()
                                     try operation.applyData()
+                                    Haptic.shared.notify(.success)
                                     UIApplication.shared.dismissAlert(animated: true)
                                     UIApplication.shared.alert(title: NSLocalizedString("Success!", comment: ""), body: NSLocalizedString("The operation was successfully applied! The operation was not saved, only applied.", comment: "when an operation is applied"))
                                 } catch {
+                                    Haptic.shared.notify(.error)
                                     UIApplication.shared.dismissAlert(animated: true)
                                     UIApplication.shared.alert(body: NSLocalizedString("An error occurred while applying the operation", comment: "when an operation fails to apply") + ": \(error.localizedDescription)")
                                 }
@@ -551,9 +555,11 @@ struct EditingOperationView: View {
                                 UIApplication.shared.alert(title: NSLocalizedString("Deleting operation...", comment: "delete button on custom operations"), body: NSLocalizedString("Please wait", comment: ""), animated: false, withButton: false)
                                 do {
                                     try AdvancedManager.deleteOperation(operationName: previousName)
+                                    Haptic.shared.notify(.success)
                                     UIApplication.shared.dismissAlert(animated: true)
                                     UIApplication.shared.alert(title: NSLocalizedString("Success!", comment: ""), body: NSLocalizedString("The operation was successfully deleted!", comment: "when an operation is deleted"))
                                 } catch {
+                                    Haptic.shared.notify(.error)
                                     UIApplication.shared.dismissAlert(animated: true)
                                     UIApplication.shared.alert(body: NSLocalizedString("An error occurred while deleting the operation", comment: "when an operation fails to delete") + ": \(error.localizedDescription)")
                                 }
@@ -568,9 +574,11 @@ struct EditingOperationView: View {
                                 UIApplication.shared.alert(title: NSLocalizedString("Restoring original file...", comment: "restore button on custom operations"), body: NSLocalizedString("Please wait", comment: ""), animated: false, withButton: false)
                                 do {
                                     try operation.applyData(fromBackup: true)
+                                    Haptic.shared.notify(.success)
                                     UIApplication.shared.dismissAlert(animated: true)
                                     UIApplication.shared.alert(title: NSLocalizedString("Success!", comment: ""), body: NSLocalizedString("The file was successfully restored!", comment: "when an operation is restored"))
                                 } catch {
+                                    Haptic.shared.notify(.error)
                                     UIApplication.shared.dismissAlert(animated: true)
                                     UIApplication.shared.alert(body: NSLocalizedString("An error occurred while restoring the files", comment: "when an operation fails to restore") + ": \(error.localizedDescription)")
                                 }

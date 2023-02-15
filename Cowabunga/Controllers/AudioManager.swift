@@ -111,9 +111,11 @@ class AudioFiles {
             if currentAudio != "Default" {
                 let succeeded = overwriteFile(typeOfFile: OverwritingFileTypes.audio, fileIdentifier: audioOption.rawValue, currentAudio)
                 if succeeded {
-                    print("successfully applied audio for " + audioOption.rawValue)
+                    Haptic.shared.notify(.success)
+                    print("Successfully applied audio for " + audioOption.rawValue)
                 } else {
-                    print("failed to apply audio for " + audioOption.rawValue)
+                    Haptic.shared.notify(.error)
+                    print("Failed to apply audio for " + audioOption.rawValue)
                     failed = true
                     if applyFailedMessage != "" {
                         applyFailedMessage += ", "

@@ -84,8 +84,10 @@ struct AudioView: View {
                         // apply the audio
                         let succeeded = AudioFiles.applyAllAudio()
                         if !succeeded {
+                            Haptic.shared.notify(.error)
                             UIApplication.shared.alert(body: NSLocalizedString("Failed to apply audio for:", comment: "Failed to apply audio") + " " + AudioFiles.applyFailedMessage + ".")
                         } else {
+                            Haptic.shared.notify(.success)
                             UIApplication.shared.alert(title: NSLocalizedString("Successfully applied audio!", comment: "applying audio succeeded"), body: NSLocalizedString("Please respring to hear changes.", comment: "respring to hear audio changes"))
                         }
                     }) {

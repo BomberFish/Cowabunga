@@ -321,11 +321,14 @@ struct HomeView: View {
             // get the user defaults
             let value: Bool = UserDefaults.standard.bool(forKey: option.key)
             if value == true {
+                Haptic.shared.play(.heavy)
                 print("Applying tweak \"" + option.key + "\"")
                 let succeeded = overwriteFile(typeOfFile: option.fileType, fileIdentifier: option.key, value)
                 if succeeded {
+                    Haptic.shared.notify(.success)
                     print("Successfully applied tweak \"" + option.key + "\"")
                 } else {
+                    Haptic.shared.notify(.error)
                     print("Failed to apply tweak \"" + option.key + "\"!!!")
                     failedSB = true
                 }
@@ -386,12 +389,14 @@ struct HomeView: View {
         } else {
             if autoRespring {
                 // auto respring on apply
+                Haptic.shared.play(.heavy)
                 UIApplication.shared.change(title: "Respringing...", body: "Please wait")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                     respring()
                 }
             } else {
                 UIApplication.shared.dismissAlert(animated: true)
+                Haptic.shared.notify(.success)
                 UIApplication.shared.alert(title: "Successfully applied tweaks!", body: "Respring to see changes.")
             }
         }

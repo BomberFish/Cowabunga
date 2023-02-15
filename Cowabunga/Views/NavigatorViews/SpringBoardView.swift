@@ -84,8 +84,10 @@ struct SpringBoardView: View {
                     print("Applying tweak \"" + option.title + "\"")
                     let succeeded = overwriteFile(typeOfFile: option.fileType, fileIdentifier: option.key, option.value)
                     if succeeded {
+                        Haptic.shared.notify(.success)
                         print("Successfully applied tweak \"" + option.title + "\"")
                     } else {
+                        Haptic.shared.notify(.error)
                         print("Failed to apply tweak \"" + option.title + "\"!!!")
                         failed = true
                     }
@@ -94,8 +96,10 @@ struct SpringBoardView: View {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 if failed {
+                    Haptic.shared.notify(.error)
                     UIApplication.shared.alert(body: "An error occurred when applying tweaks")
                 } else {
+                    Haptic.shared.notify(.success)
                     UIApplication.shared.alert(title: "Successfully applied tweaks!", body: "Respring to see changes.")
                 }
             }
