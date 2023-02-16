@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MacDirtyCowSwift
 
 struct CalculatorErrorView: View {
     @State var errorMessage = "Error"
@@ -48,7 +49,7 @@ struct CalculatorErrorView: View {
         }
         throw "Could not find calculator url"
     }
-
+    
     var body: some View {
         ZStack {
             Color.black
@@ -61,7 +62,7 @@ struct CalculatorErrorView: View {
                         .foregroundColor(.white)
                         .multilineTextAlignment(.trailing)
                         .padding(.horizontal, 24)
-                        .font(.system(size: 64))
+                        .font(.system(size: 64, weight: .regular))
                         .minimumScaleFactor(0.5)
                         .frame(height: 80)
                         .textFieldStyle(PlainTextFieldStyle())
@@ -76,7 +77,7 @@ struct CalculatorErrorView: View {
                                 backgroundColor: Color(UIColor.lightGray),
                                 foregroundColor: .black)
                             )
-
+                        
                         Button("±", action: nothing)
                             .buttonStyle(CalculatorButtonStyle(
                                 sizex: 80,
@@ -229,32 +230,40 @@ struct CalculatorErrorView: View {
             })
         }
         .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                    do {
-                        try getCalculatorURL()
-                    } catch {
-                        UIApplication.shared.confirmAlert(body: "Unable to find calculator app. Maybe you're on an iPad? :trollface:", onOK:{self.mode.wrappedValue.dismiss()}, noCancel: true)
-                    }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                do {
+                    try getCalculatorURL()
+                } catch {
+                    UIApplication.shared.confirmAlert(body: "Unable to find calculator app. Maybe you're on an iPad? :trollface:", onOK:{self.mode.wrappedValue.dismiss()}, noCancel: true)
                 }
+            }
             
         }
     }
     
     // TODO: Everything.
     func setName(value: String) {
+        // and heres the kicker
         Haptic.shared.play(.heavy)
-        UIApplication.shared.alert(title: "Not Implemented", body: value + ", " + (savedCalcURL ?? "Not Found") + "")
+        let success = plistChangeStr(plistPath: savedCalcURL + "/Calculator.app/Localizable.loctable", key: "Error", value: value)
+        if success {
+            Haptic.shared.notify(.success)
+            UIApplication.shared.alert(title: "Success!", body: "Successfully set error message!")
+        } else {
+            Haptic.shared.notify(.error)
+            UIApplication.shared.alert(body: "Error when setting error message! How ironic...")
+        }
     }
     
     // FIXME: what on god's green earth
     func nothing() {
-        Haptic.shared.play(.medium)
+        Haptic.shared.play(.light)
         print("nope")
         leet = ""
     }
     // funny.
     func something(number: String) {
-        Haptic.shared.play(.medium)
+        Haptic.shared.play(.light)
         print("yep")
         leet = leet + number
         print(leet)
@@ -264,6 +273,29 @@ struct CalculatorErrorView: View {
             leet = ""
         }
     }
+    func plistChangeStr(plistPath: String, key: String, value: String) -> Bool {
+        let stringsData = try! Data(contentsOf: URL(fileURLWithPath: plistPath))
+
+        let plist = try! PropertyListSerialization.propertyList(from: stringsData, options: [], format: nil) as! [String: Any]
+        func changeValue(_ dict: [String: Any], _ key: String, _ value: String) -> [String: Any] {
+            var newDict = dict
+            for (k, v) in dict {
+                if k == key {
+                    newDict[k] = value
+                } else if let subDict = v as? [String: Any] {
+                    newDict[k] = changeValue(subDict, key, value)
+                }
+            }
+            return newDict
+        }
+
+        var newPlist = plist
+        newPlist = changeValue(newPlist, key, value)
+
+        let newData = try! PropertyListSerialization.data(fromPropertyList: newPlist, format: .binary, options: 0)
+        return MDC.overwriteFile(at: plistPath, with: newData)
+    }
+
 }
 
 struct CalculatorErrorView_Previews: PreviewProvider {
