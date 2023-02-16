@@ -10,6 +10,7 @@ import SwiftUI
 struct CalculatorErrorView: View {
     @State var errorMessage = "Error"
     @State var leet = ""
+    @State var savedCalcURL = ""
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     struct CalculatorButtonStyle: ButtonStyle {
         var sizex: CGFloat
@@ -27,19 +28,26 @@ struct CalculatorErrorView: View {
         }
     }
     
-    // Thanks suslocation! :trolleytools:
-    var calculatorBundleURL: URL? = {
-        let apps = {
+    // Thanks lemin!
+    func getCalculatorURL() throws -> URL {
+        if savedCalcURL != "" {
+            return URL(fileURLWithPath: savedCalcURL)
+        }
+        
+        let appDataPath = "/var/containers/Bundle/Application"
+        for url in try FileManager.default.contentsOfDirectory(at: URL(fileURLWithPath: appDataPath), includingPropertiesForKeys: []) {
             do {
-                return try ApplicationManager.getApps().first(where: { $0.bundleIdentifier == "com.apple.calculator" })?.bundleURL
+                let plist = try PropertyListSerialization.propertyList(from: try Data(contentsOf: url.appendingPathComponent(".com.apple.mobile_container_manager.metadata.plist")), options: [], format: nil) as! [String: Any]
+                if plist["MCMMetadataIdentifier"] != nil && plist["MCMMetadataIdentifier"]! as! String == "com.apple.calculator" {
+                    savedCalcURL = url.path
+                    return url
+                }
             } catch {
-                // :trollface:
-                return nil
+                print(error.localizedDescription)
             }
-            
-        }()
-        return apps
-    }()
+        }
+        throw "Could not find calculator url"
+    }
 
     var body: some View {
         ZStack {
@@ -221,19 +229,21 @@ struct CalculatorErrorView: View {
             })
         }
         .onAppear {
-            if calculatorBundleURL == nil {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                    UIApplication.shared.confirmAlert(body: "Unable to find calculator app. Maybe you're on an iPad? :trollface:", onOK:{self.mode.wrappedValue.dismiss()}, noCancel: true)
+                    do {
+                        try getCalculatorURL()
+                    } catch {
+                        UIApplication.shared.confirmAlert(body: "Unable to find calculator app. Maybe you're on an iPad? :trollface:", onOK:{self.mode.wrappedValue.dismiss()}, noCancel: true)
+                    }
                 }
-            }
+            
         }
     }
     
     // TODO: Everything.
     func setName(value: String) {
         Haptic.shared.play(.heavy)
-        let calculatorBundlePath: String? = calculatorBundleURL?.absoluteString
-        UIApplication.shared.alert(title: "Not Implemented", body: value + ", " + (calculatorBundlePath ?? "Not Found") + "")
+        UIApplication.shared.alert(title: "Not Implemented", body: value + ", " + (savedCalcURL ?? "Not Found") + "")
     }
     
     // FIXME: what on god's green earth
