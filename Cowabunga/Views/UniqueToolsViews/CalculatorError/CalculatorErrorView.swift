@@ -19,7 +19,7 @@ struct CalculatorErrorView: View {
         
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
-                .font(.system(size: 32, weight: .medium))
+                .font(.system(size: 32, weight: .regular))
                 .frame(width: sizex, height: sizey)
                 .background(backgroundColor)
                 .foregroundColor(foregroundColor)
