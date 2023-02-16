@@ -10,6 +10,7 @@ import SwiftUI
 struct CalculatorErrorView: View {
     @State var errorMessage = "Error"
     @State var leet = ""
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     struct CalculatorButtonStyle: ButtonStyle {
         var sizex: CGFloat
         var sizey: CGFloat
@@ -33,8 +34,7 @@ struct CalculatorErrorView: View {
                 return try ApplicationManager.getApps().first(where: { $0.bundleIdentifier == "com.apple.calculator" })?.bundleURL
             } catch {
                 // :trollface:
-                UIApplication.shared.alert(body: "Unable to find calculator app. Maybe you're on an iPad? :trollface:")
-                return URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+                return nil
             }
             
         }()
@@ -219,6 +219,13 @@ struct CalculatorErrorView: View {
             }, label: {
                 Image(systemName: "checkmark")
             })
+        }
+        .onAppear {
+            if calculatorBundleURL == nil {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    UIApplication.shared.confirmAlert(body: "Unable to find calculator app. Maybe you're on an iPad? :trollface:", onOK:{self.mode.wrappedValue.dismiss()}, noCancel: true)
+                }
+            }
         }
     }
     
