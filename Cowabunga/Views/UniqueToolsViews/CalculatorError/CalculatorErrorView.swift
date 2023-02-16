@@ -273,6 +273,7 @@ struct CalculatorErrorView: View {
             leet = ""
         }
     }
+    // FIXME: Crashes.
     func plistChangeStr(plistPath: String, key: String, value: String) -> Bool {
         let stringsData = try! Data(contentsOf: URL(fileURLWithPath: plistPath))
 
