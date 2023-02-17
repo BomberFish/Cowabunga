@@ -17,7 +17,7 @@ final class ChangeAppIconViewModel: ObservableObject {
             selectedAppIcon = .primary
         }
     }
-
+    
     func updateAppIcon(to icon: AppIcon) {
         let previousAppIcon = selectedAppIcon
         selectedAppIcon = icon
