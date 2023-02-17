@@ -16,6 +16,7 @@ class SpringboardColorManager {
         case libraryFolder
         case switcher
         case notif
+        case module
     }
     
     private static let finalFiles: [SpringboardType: [String]] = [
@@ -24,7 +25,8 @@ class SpringboardColorManager {
         SpringboardType.dock: ["dockDark", "dockLight"],
         SpringboardType.folderBG: ["folderExpandedBackgroundHome", "homeScreenOverlay", "homeScreenOverlay-iPad"],
         SpringboardType.switcher: ["homeScreenBackdrop-application"],
-        SpringboardType.notif: ["plattersDark", "platters"]
+        SpringboardType.notif: ["plattersDark", "platters"],
+        SpringboardType.module: ["modules"]
     ]
     
     private static let fileFolders: [SpringboardType: String] = [
@@ -33,7 +35,8 @@ class SpringboardColorManager {
         SpringboardType.dock: "/System/Library/PrivateFrameworks/CoreMaterial.framework/",
         SpringboardType.folderBG: "/System/Library/PrivateFrameworks/SpringBoardHome.framework/",
         SpringboardType.switcher: "/System/Library/PrivateFrameworks/SpringBoard.framework/",
-        SpringboardType.notif: "/System/Library/PrivateFrameworks/CoreMaterial.framework/"
+        SpringboardType.notif: "/System/Library/PrivateFrameworks/CoreMaterial.framework/",
+        SpringboardType.module: "/System/Library/PrivateFrameworks/CoreMaterial.framework/"
     ]
     
     private static let fileExt: [SpringboardType: String] = [
@@ -42,7 +45,8 @@ class SpringboardColorManager {
         SpringboardType.dock: ".materialrecipe",
         SpringboardType.folderBG: ".materialrecipe",
         SpringboardType.switcher: ".materialrecipe",
-        SpringboardType.notif: ".materialrecipe"
+        SpringboardType.notif: ".materialrecipe",
+        SpringboardType.module: ".materialrecipe"
     ]
     
     static func getColor(forType: SpringboardType) -> Color {
@@ -71,11 +75,11 @@ class SpringboardColorManager {
     
     static func getBlur(forType: SpringboardType) -> Double {
         let bgDir = getBackgroundDirectory()
-        if bgDir == nil || finalFiles[forType] == nil || !FileManager.default.fileExists(atPath: (bgDir!.appendingPathComponent("\(finalFiles[forType]!).materialrecipe").path)) {
+        if bgDir == nil || finalFiles[forType] == nil || !FileManager.default.fileExists(atPath: (bgDir!.appendingPathComponent("\(finalFiles[forType]![0]).materialrecipe").path)) {
             return 30
         }
         do {
-            let newData = try Data(contentsOf: bgDir!.appendingPathComponent("\(finalFiles[forType]!).materialrecipe"))
+            let newData = try Data(contentsOf: bgDir!.appendingPathComponent("\(finalFiles[forType]![0]).materialrecipe"))
             let plist = try PropertyListSerialization.propertyList(from: newData, options: [], format: nil) as! [String: Any]
             // get the blur
             if let firstLevel = plist["baseMaterial"] as? [String: Any], let secondLevel = firstLevel["materialFiltering"] as? [String: Any], let thirdLevel = secondLevel["blurRadius"] as? Int {
@@ -113,9 +117,18 @@ class SpringboardColorManager {
                         }
                         
                         secondLevel["tintColor"] = thirdLevel
-                        secondLevel["tintAlpha"] = color.alpha*( (forType == SpringboardType.notif) ? 0.8: 0.3)
+                        secondLevel["tintAlpha"] = color.alpha*( (forType == .notif || forType == .module) ? 0.8: 0.3)
                         firstLevel["tinting"] = secondLevel
                         plist["baseMaterial"] = firstLevel
+                    }
+                    
+                    if forType == .module {
+                        let styles: [String: String] = [
+                            "fill": "moduleFill",
+                            "stroke": "moduleStroke"
+                        ]
+                        plist["styles"] = styles
+                        plist["materialSettingsVersion"] = 2
                     }
                     
                     // fill with empty data
