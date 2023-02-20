@@ -36,10 +36,9 @@ struct HomeView: View {
         .init(names: "Maxiwee#9333", contribution: "🇩🇪 German"),
         .init(names: "Eevee#0094", contribution: "🇷🇺 Russian"),
         .init(names: "kylak#5621", contribution: "🇧🇷 Portuguese"),
-        .init(names: "Skyfall#5572", contribution: "🇨🇳 Chinese (China Mainland)"),
-        .init(names: "@CySxL", contribution: "🇹🇼 Chinese (Taiwan)"),
+        .init(names: "Skyfall#5572 & Chihaodong", contribution: "🇨🇳 Chinese (China Mainland)"),
+        .init(names: "@CySxL", contribution: "🇹🇼 Traditional Chinese (Taiwan)"),
         .init(names: "mystical#2343 & yun#7739", contribution: "🇻🇳 Vietnamese"),
-        .init(names: "JameSpace#5649", contribution: "🇻🇳 Vietnamese (Vietnam)"),
         .init(names: "crimeboss#6704 & meliherdem#0001", contribution: "🇹🇷 Turkish"),
         .init(names: "TaekyungAncal#7857", contribution: "🇰🇷 Korean"),
         .init(names: "Aru Pro#2789", contribution: "🇦🇪 Arabic")
@@ -68,28 +67,26 @@ struct HomeView: View {
                 Section {
                     VStack {
                         // apply all tweaks button
-                        // "Applies all tweaks which were applied before."
                         HStack {
                             Button("Fix tweaks") {
                                 applyTweaks()
                             }
                             .buttonStyle(TintedButton(color: .blue, fullwidth: true))
                             Button {
-                                UIApplication.shared.alert(title: "Info", body: "Respring is an action that allows restarting your Home Screen without rebooting your device.")
+                                UIApplication.shared.alert(title: NSLocalizedString("Info", comment: "fix tweaks info header"), body: NSLocalizedString("Applies all tweaks which were applied before.", comment: "fix tweaks info"))
                             } label: {
                                 Image(systemName: "info")
                             }
                             .buttonStyle(TintedButton(material: .systemMaterial, fullwidth: false))
                         }
                         
-                        //"Respring is an action that allows restarting your Home Screen without rebooting your device."
                         HStack {
                             Button("Respring") {
                                 respring()
                             }
                             .buttonStyle(TintedButton(color: .red, fullwidth: true))
                             Button {
-                                UIApplication.shared.alert(title: "Info", body: "Respring is an action that allows restarting your Home Screen without rebooting your device.")
+                                UIApplication.shared.alert(title: NSLocalizedString("Info", comment: "respring info header"), body: NSLocalizedString("Respring is an action that allows restarting your Home Screen without rebooting your device.", comment: "respring info"))
                             } label: {
                                 Image(systemName: "info")
                             }

@@ -9,6 +9,8 @@ import SwiftUI
 import Photos
 
 struct SpringboardColorChangerView: View {
+    @StateObject var viewModel = ChangeAppIconViewModel()
+    
     @State private var badgeColor = Color.red
     @State private var badgeRadius: CGFloat = 24
     @State private var showingBadgeImagePicker = false
@@ -54,11 +56,11 @@ struct SpringboardColorChangerView: View {
                             // MARK: Badge
                             VStack {
                                 ZStack(alignment: .topTrailing) {
-                                    Image(uiImage: UIImage(named: "1024")!)
+                                    Image(uiImage: viewModel.selectedAppIcon.preview)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: minSize / 2, height: minSize / 2)
-                                        .cornerRadius(minSize / 8)
+                                        .cornerRadius(minSize / 10)
                                     ZStack {
                                         if badgeImage == nil {
                                             Rectangle()
@@ -187,6 +189,8 @@ struct SpringboardColorChangerView: View {
                         // MARK: Folder
                         VStack {
                             let iconColors: [Color] = [.blue, .orange, .green, .purple, .white, .secondary]
+                            
+                            #warning("Unoptimized af. Adds 400ms on sourcelocation's machine of build time")
                             ZStack {
                                 ZStack {
                                     // Background
@@ -298,6 +302,7 @@ struct SpringboardColorChangerView: View {
                         
                         // MARK: CC Modulea
                         VStack {
+                            #warning("Unoptimized af. Adds 400ms on sourcelocation's machine of build time")
                             ZStack {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: minSize / 24)

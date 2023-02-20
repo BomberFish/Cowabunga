@@ -19,6 +19,8 @@ struct OtherModsView: View {
     
     @State private var supervised: Bool = UserDefaults.standard.bool(forKey: "IsSupervised")
     
+    @State private var screenTimeEnabled: Bool = FileManager.default.fileExists(atPath: "/var/mobile/Library/Preferences/com.apple.ScreenTimeAgent.plist")
+    
     struct DeviceSubType: Identifiable {
         var id = UUID()
         var key: Int
@@ -172,9 +174,36 @@ struct OtherModsView: View {
                     }
                     .padding(.leading, 10)
                 }
-            } header: {
-                Label("More Settings", systemImage: "gearshape")
-            }
+                
+                // screen time
+                HStack {
+                    Image(systemName: "hourglass")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.blue)
+                    
+                    Text("Screen Time Enabled")
+                        .minimumScaleFactor(0.5)
+                    
+                    Spacer()
+                    
+                    Toggle(isOn: $screenTimeEnabled) {
+                        
+                    }.onChange(of: screenTimeEnabled) { new in
+                        // set the value
+                        do {
+                            try modifyScreenTime(enabled: screenTimeEnabled)
+                            UIApplication.shared.alert(title: NSLocalizedString("Success!", comment: ""), body: NSLocalizedString("Screen time was successfully disabled, please reboot to finish application.", comment: ""))
+                        } catch {
+                            UIApplication.shared.alert(body: error.localizedDescription)
+                        }
+                    }
+                    .padding(.leading, 10)
+                }
+        } header: {
+            Label("More Settings", systemImage: "gearshape")
+        }
             
             Section {
                 // software version
@@ -227,7 +256,7 @@ struct OtherModsView: View {
                     }
                     
                     // resolution setter
-                    HStack {
+                    /*HStack {
                         Image(systemName: "squareshape.controlhandles.on.squareshape.controlhandles")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -277,24 +306,24 @@ struct OtherModsView: View {
                                     data.write(toFile: url.path, atomically: true)
                                 }
                                 
-                                do {
-                                    let tmpPlistURL = URL(fileURLWithPath: "/var/tmp/com.apple.iokit.IOMobileGraphicsFamily.plist")
-                                    try? FileManager.default.removeItem(at: tmpPlistURL)
-                                    
-                                    try createPlist(at: tmpPlistURL)
-                                    
-                                    let aliasURL = URL(fileURLWithPath: "/private/var/mobile/Library/Preferences/com.apple.iokit.IOMobileGraphicsFamily.plist")
-                                    try? FileManager.default.removeItem(at: aliasURL)
-                                    try FileManager.default.createSymbolicLink(at: aliasURL, withDestinationURL: tmpPlistURL)
-                                    
-                                    UIApplication.shared.confirmAlert(title: NSLocalizedString("Success!", comment: ""), body: NSLocalizedString("Please respring to finalize changes. Reboot to revert.", comment: "Successfully applying custom resolution"), onOK: {
+                                UIApplication.shared.confirmAlert(title: NSLocalizedString("Resolution will now apply", comment: ""), body: NSLocalizedString("Reboot to revert resolution changes. It will auto respring when done", comment: "Successfully applying custom resolution"), onOK: {
+                                    do {
+                                        let tmpPlistURL = URL(fileURLWithPath: "/var/tmp/com.apple.iokit.IOMobileGraphicsFamily.plist")
+                                        try? FileManager.default.removeItem(at: tmpPlistURL)
+                                        
+                                        try createPlist(at: tmpPlistURL)
+                                        
+                                        let aliasURL = URL(fileURLWithPath: "/private/var/mobile/Library/Preferences/com.apple.iokit.IOMobileGraphicsFamily.plist")
+                                        try? FileManager.default.removeItem(at: aliasURL)
+                                        try FileManager.default.createSymbolicLink(at: aliasURL, withDestinationURL: tmpPlistURL)
                                         xpc_crash("com.apple.cfprefsd.daemon")
                                         xpc_crash("com.apple.backboard.TouchDeliveryPolicyServer")
-                                    }, noCancel: true)
-                                } catch {
-                                    print("An error occurred: \(error.localizedDescription)")
-                                    UIApplication.shared.alert(body: NSLocalizedString("Failed to apply resolution:", comment: "Failing to apply custom resolution") + " \(error.localizedDescription)")
-                                }
+                                        restartBackboard()
+                                    } catch {
+                                        print("An error occurred: \(error.localizedDescription)")
+                                        UIApplication.shared.alert(body: NSLocalizedString("Failed to apply resolution:", comment: "Failing to apply custom resolution") + " \(error.localizedDescription)")
+                                    }
+                                }, noCancel: false)
                             })
                             sizeAlert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
                                 // cancel the process
@@ -303,7 +332,7 @@ struct OtherModsView: View {
                         })
                         .foregroundColor(.blue)
                         .padding(.leading, 10)
-                    }
+                    }*/
                     
                     // device name
                     /*HStack {
