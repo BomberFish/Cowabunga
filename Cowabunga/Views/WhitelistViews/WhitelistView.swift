@@ -6,13 +6,12 @@
 //
 
 import SwiftUI
+import os.log
 
-// TODO: Translate
-
-struct WhitelistView: View {
+struct ContentView: View {
     @State var blacklist = true
-    @State var banned = true
-    @State var cdHash = true
+    @State var banned: Bool = UserDefaults.standard.bool(forKey: "BannedEnabled")
+    @State var cdHash: Bool = UserDefaults.standard.bool(forKey: "CdEnabled")
     @State var inProgress = false
     @State var message = ""
     @State var banned_success = false
@@ -20,26 +19,13 @@ struct WhitelistView: View {
     @State var hash_success = false
     @State var success = false
     @State var success_message = ""
-
     var body: some View {
+        NavigationView {
             List {
-                Section {
-                    Toggle("Overwrite Blacklist", isOn: $blacklist)
-                        .disabled(true)
-                        .toggleStyle(SwitchToggleStyle(tint: .accentColor))
-                        .disabled(inProgress)
-                    Toggle("Overwrite Banned Apps", isOn: $banned)
-                        .toggleStyle(SwitchToggleStyle(tint: .accentColor))
-                        .disabled(inProgress)
-                    Toggle("Overwrite CDHashes", isOn: $cdHash)
-                        .toggleStyle(SwitchToggleStyle(tint: .accentColor))
-                        .disabled(inProgress)
-                } header: {
-                    Label("Options", systemImage: "gear")
-                }
                 Section {
                     Button(
                         action: {
+                            os_log(.debug, "FG: Applying!")
                             Haptic.shared.play(.heavy)
                             inProgress = true
                             
@@ -55,7 +41,6 @@ struct WhitelistView: View {
                             success = Whitelist.overwriteBlacklist()
                             
                             // FIXME: Bad.
-                            
                             if banned_success && hash_success {
                                 success_message = "Successfully removed: Blacklist, Banned Apps, CDHashes\nDidn't overwrite: none"
                             } else if !banned_success && hash_success {
@@ -70,8 +55,10 @@ struct WhitelistView: View {
                                 UIApplication.shared.alert(title: "Success", body: success_message, withButton: true)
                                 inProgress = false
                                 Haptic.shared.notify(.success)
+                                os_log(.debug, "FG: Success! See UI for details.")
                             } else {
                                 UIApplication.shared.alert(title: "Error", body: "An error occurred while writing to the file.", withButton: true)
+                                os_log(.debug, "FG: Error! See UI for details.")
                                 inProgress = false
                                 Haptic.shared.notify(.error)
                             }
@@ -82,23 +69,49 @@ struct WhitelistView: View {
                 } header: {
                     Label("Make It So, Number One", systemImage: "arrow.right.circle")
                 }
+                Section {
+                    Toggle(isOn: $blacklist, label:{Label("Overwrite Blacklist", systemImage: "xmark.seal")})
+                        .toggleStyle(.switch)
+                        .disabled(true)
+                        .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                        .disabled(inProgress)
+                    Toggle(isOn: $banned, label:{Label("Overwrite Banned Apps", systemImage: "xmark.app")})
+                        .toggleStyle(.switch)
+                        .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                        .disabled(inProgress)
+                        .onChange(of: banned) { new in
+                            // set the user defaults
+                            UserDefaults.standard.set(new, forKey: "BannedEnabled")
+                        }
+                    Toggle(isOn: $cdHash, label:{Label("Overwrite CDHashes", systemImage: "number.square")})
+                        .toggleStyle(.switch)
+                        .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                        .disabled(inProgress)
+                        .onChange(of: cdHash) { new in
+                            // set the user defaults
+                            UserDefaults.standard.set(new, forKey: "CdEnabled")
+                        }
+                } header: {
+                    Label("Options", systemImage: "gear")
+                }
                 
                 Section {
                     NavigationLink(destination: FileContentsView()) {
-                        Text("View contents of blacklist files")
+                        Label("View contents of blacklist files", systemImage: "doc.text")
                     }
                 } header : {
                     Label("Advanced", systemImage: "wrench.and.screwdriver")
                 }
-                Section{}header:{Text("")}
+                
             }
-        
+            .navigationTitle("Whitelist")
+        }
         .navigationTitle("Whitelist")
     }
 }
 
-struct WhitelistView_Previews: PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        WhitelistView()
+        ContentView()
     }
 }

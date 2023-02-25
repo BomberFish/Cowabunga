@@ -12,30 +12,56 @@ struct FileContentsView: View {
     @State var bannedAppsContent = Whitelist.readFile(path: "/private/var/db/MobileIdentityData/AuthListBannedUpps.plist") ?? "ERROR: Could not read from file! Does it even exist?"
     @State var cdHashesContent = Whitelist.readFile(path: "/private/var/db/MobileIdentityData/AuthListBannedCdHashes.plist") ?? "ERROR: Could not read from file! Does it even exist?"
     
+    @State var refreshing = false
+    
     var body: some View {
         if #available(iOS 15.0, *) {
             List {
                 Section {
-                    Text(blacklistContent)
-                        .font(.system(.subheadline, design: .monospaced))
+                    if refreshing {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                    } else {
+                        Text(blacklistContent)
+                            .font(.system(.subheadline, design: .monospaced))
+                    }
+                    
                 } header: {
                     Label("Blacklist", systemImage: "xmark.seal")
                 }
                 
                 Section {
-                    Text(bannedAppsContent)
-                        .font(.system(.subheadline, design: .monospaced))
+                    if refreshing {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                    } else {
+                        Text(bannedAppsContent)
+                            .font(.system(.subheadline, design: .monospaced))
+                    }
                 } header: {
                     Label("Banned Apps", systemImage: "xmark.app")
                 }
                 
                 Section {
-                    Text(cdHashesContent)
-                        .font(.system(.subheadline, design: .monospaced))
+                    if refreshing {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                    } else {
+                        Text(cdHashesContent)
+                            .font(.system(.subheadline, design: .monospaced))
+                    }
                 } header: {
                     Label("CD Hashes", systemImage: "number.square")
                 }
-                
             }
             
             .refreshable {
@@ -56,22 +82,47 @@ struct FileContentsView: View {
             }
             List {
                 Section {
-                    Text(blacklistContent)
-                        .font(.system(.subheadline, design: .monospaced))
+                    if refreshing {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                    } else {
+                        Text(blacklistContent)
+                            .font(.system(.subheadline, design: .monospaced))
+                    }
+                    
                 } header: {
                     Label("Blacklist", systemImage: "xmark.seal")
                 }
                 
                 Section {
-                    Text(bannedAppsContent)
-                        .font(.system(.subheadline, design: .monospaced))
+                    if refreshing {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                    } else {
+                        Text(bannedAppsContent)
+                            .font(.system(.subheadline, design: .monospaced))
+                    }
                 } header: {
                     Label("Banned Apps", systemImage: "xmark.app")
                 }
-                
+
                 Section {
-                    Text(cdHashesContent)
-                        .font(.system(.subheadline, design: .monospaced))
+                    if refreshing {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                    } else {
+                        Text(cdHashesContent)
+                            .font(.system(.subheadline, design: .monospaced))
+                    }
                 } header: {
                     Label("CD Hashes", systemImage: "number.square")
                 }
@@ -127,13 +178,18 @@ struct FileContentsView: View {
     
     func refreshFiles() {
         print("Updating files!")
+        refreshing = true
         blacklistContent = ""
         bannedAppsContent = ""
         cdHashesContent = ""
-        blacklistContent = Whitelist.readFile(path: "/private/var/db/MobileIdentityData/Rejections.plist") ?? "ERROR: Could not read from file! Does it even exist?"
-        bannedAppsContent = Whitelist.readFile(path: "/private/var/db/MobileIdentityData/AuthListBannedUpps.plist") ?? "ERROR: Could not read from file! Does it even exist?"
-        cdHashesContent = Whitelist.readFile(path: "/private/var/db/MobileIdentityData/AuthListBannedCdHashes.plist") ?? "ERROR: Could not read from file! Does it even exist?"
-        print("Files updated!")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            blacklistContent = Whitelist.readFile(path: "/private/var/db/MobileIdentityData/Rejections.plist") ?? "ERROR: Could not read from file! Are you running in the simulator or not unsandboxed?"
+            bannedAppsContent = Whitelist.readFile(path: "/private/var/db/MobileIdentityData/AuthListBannedUpps.plist") ?? "ERROR: Could not read from file! Are you running in the simulator or not unsandboxed?"
+            cdHashesContent = Whitelist.readFile(path: "/private/var/db/MobileIdentityData/AuthListBannedCdHashes.plist") ?? "ERROR: Could not read from file! Are you running in the simulator or not unsandboxed?"
+            print("Files updated!")
+            refreshing = false
+            Haptic.shared.play(.light)
+        }
     }
         
 }
