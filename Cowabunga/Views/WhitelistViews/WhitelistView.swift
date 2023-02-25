@@ -8,7 +8,7 @@
 import SwiftUI
 import os.log
 
-struct ContentView: View {
+struct WhitelistView: View {
     @State var blacklist = true
     @State var banned: Bool = UserDefaults.standard.bool(forKey: "BannedEnabled")
     @State var cdHash: Bool = UserDefaults.standard.bool(forKey: "CdEnabled")
@@ -82,6 +82,7 @@ struct ContentView: View {
                         .onChange(of: banned) { new in
                             // set the user defaults
                             UserDefaults.standard.set(new, forKey: "BannedEnabled")
+                            
                         }
                     Toggle(isOn: $cdHash, label:{Label("Overwrite CDHashes", systemImage: "number.square")})
                         .toggleStyle(.switch)
@@ -110,8 +111,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct WhitelistView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        WhitelistView()
     }
 }
